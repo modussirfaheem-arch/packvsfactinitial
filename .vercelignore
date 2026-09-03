@@ -1,0 +1,9 @@
+# Exclude frontend source & node_modules from Python lambda bundle
+frontend/node_modules
+frontend/src
+tests/
+docker/
+docs/
+*.md
+.git/
+.venv/

@@ -2,8 +2,7 @@ fastapi
 uvicorn
 sqlalchemy
 pydantic
-scikit-learn
-numpy
+scikit-learn==1.3.2
 joblib
 pillow
 python-multipart
