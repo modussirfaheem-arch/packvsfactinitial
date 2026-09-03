@@ -4,6 +4,9 @@ node_modules/
 venv/
 ENV/
 
+# Nested duplicates
+packvsfact/
+
 # Python Cache
 __pycache__/
 *.py[cod]
