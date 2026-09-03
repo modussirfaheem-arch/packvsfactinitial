@@ -5,11 +5,7 @@ pydantic
 scikit-learn
 numpy
 joblib
-pytesseract
 pillow
-opencv-python-headless
 python-multipart
 pyjwt
 passlib
-httpx
-pytest
