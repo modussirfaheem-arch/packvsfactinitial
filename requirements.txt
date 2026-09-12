@@ -2,9 +2,6 @@ fastapi
 uvicorn
 sqlalchemy
 pydantic
-scikit-learn
-numpy
-joblib
 pillow
 python-multipart
 pyjwt
