@@ -14,7 +14,8 @@ if PROJECT_ROOT not in sys.path:
 if BACKEND_DIR not in sys.path:
     sys.path.insert(0, BACKEND_DIR)
 
-sys.stdout.reconfigure(encoding='utf-8')
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 
 from sqlalchemy.orm import Session
 from datetime import datetime
@@ -91,6 +92,10 @@ CATEGORIES_EXT = [
 def seed_database():
     db: Session = SessionLocal()
     try:
+        if db.query(Product).first():
+            print("[INFO] Database already populated with products.")
+            return
+
         db.query(Claim).delete()
         db.query(Ingredient).delete()
         db.query(Nutrition).delete()
