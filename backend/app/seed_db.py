@@ -17,11 +17,11 @@ if BACKEND_DIR not in sys.path:
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
+import hashlib
 from sqlalchemy.orm import Session
 from datetime import datetime
 
 from app.database import engine, Base, SessionLocal
-from app.services.security_service import SecurityService
 from app.models.models import (
     User, AdminUser, Product, Nutrition, Ingredient, Claim, Price, Category,
     Brand, Barcode, UserPreference, DemandEvent, ModelVersion
@@ -117,9 +117,11 @@ def seed_database():
             category_map[cat_name] = cat
         db.commit()
 
-        # Seed Users
-        admin_pass = SecurityService.hash_password("Admin@123456")
-        user_pass = SecurityService.hash_password("User@123456")
+        def hash_pwd(p):
+            return hashlib.sha256(("packvsfact_salt_2026_" + p).encode('utf-8')).hexdigest()
+
+        admin_pass = hash_pwd("Admin@123456")
+        user_pass = hash_pwd("User@123456")
 
         admin_usr = User(email="admin@packvsfact.in", full_name="PackVsFact Senior Auditor", hashed_password=admin_pass, role="ADMIN")
         consumer_usr = User(email="user@packvsfact.in", full_name="Rahul Sharma", hashed_password=user_pass, role="USER")

@@ -5,9 +5,17 @@ Handles password hashing, verification, JWT token creation, and RBAC authorizati
 
 import os
 import hashlib
-import jwt
 from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
+
+try:
+    import jwt
+except ImportError:
+    try:
+        import pyjwt as jwt
+    except ImportError:
+        jwt = None
+
 
 SECRET_KEY = os.getenv("SECRET_KEY", "packvsfact_sih_super_secret_jwt_key_2026")
 ALGORITHM = "HS256"

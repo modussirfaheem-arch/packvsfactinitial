@@ -41,6 +41,13 @@ def search_products(
     limit: int = 20,
     db: Session = Depends(get_db)
 ):
+    if db.query(Product).first() is None:
+        try:
+            from app.seed_db import seed_database
+            seed_database()
+        except Exception as e:
+            print(f"Fallback DB Seed Warning: {e}")
+
     query = db.query(Product)
 
     if q and len(q.strip()) > 0:
