@@ -1,9 +1,9 @@
-# Exclude frontend source & node_modules from Python lambda bundle
+# Exclude frontend node_modules & temporary build files from Vercel deployment
 frontend/node_modules
-frontend/src
 tests/
 docker/
 docs/
 *.md
 .git/
 .venv/
+
