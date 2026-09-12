@@ -27,7 +27,7 @@ export default function DashboardPage() {
     setLoading(true);
     try {
       const cat = selectedCategory === 'All Categories' ? '' : selectedCategory;
-      const res = await api.searchProducts(query, cat, null, maxPriceFilter ? parseFloat(maxPriceFilter) : null);
+      const res = await api.searchProducts(query, cat, null, maxPriceFilter ? parseFloat(maxPriceFilter) : null, 'ADULT');
       setProducts(res.products || []);
     } catch (err) {
       console.error(err);

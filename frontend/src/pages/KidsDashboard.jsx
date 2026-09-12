@@ -39,7 +39,7 @@ export default function KidsDashboard() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await api.searchProducts(query);
+      const res = await api.searchProducts(query, '', null, null, 'KIDS');
       setProducts(res.products || []);
     } catch (err) {
       console.error(err);

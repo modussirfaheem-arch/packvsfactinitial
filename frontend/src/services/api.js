@@ -49,12 +49,13 @@ export const api = {
   },
 
   // Products & Barcode
-  async searchProducts(q = '', category = '', minScore = null, maxPrice = null) {
+  async searchProducts(q = '', category = '', minScore = null, maxPrice = null, targetAudience = null) {
     const params = new URLSearchParams();
     if (q) params.append('q', q);
     if (category) params.append('category', category);
     if (minScore !== null) params.append('min_score', minScore);
     if (maxPrice !== null) params.append('max_price', maxPrice);
+    if (targetAudience) params.append('target_audience', targetAudience);
 
     const res = await client.get(`/api/products/search?${params.toString()}`);
     return res.data;

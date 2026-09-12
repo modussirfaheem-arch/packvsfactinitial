@@ -40,6 +40,7 @@ class Product(Base):
     currency = Column(String, default="INR")
     image = Column(String, nullable=True)
     ingredients_text = Column(Text, nullable=True)
+    target_audience = Column(String, default="ADULT") # ADULT, KIDS, ALL
     
     nutri_score_grade = Column(String, default="C") # A, B, C, D, E
     nutri_score_value = Column(Integer, default=5)

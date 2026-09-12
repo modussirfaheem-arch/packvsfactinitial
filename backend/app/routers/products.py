@@ -36,9 +36,10 @@ class ProductSubmitSchema(BaseModel):
 def search_products(
     q: Optional[str] = Query(None, description="Query string for product name, brand, ingredient, or barcode"),
     category: Optional[str] = None,
+    target_audience: Optional[str] = None,
     min_score: Optional[int] = None,
     max_price: Optional[float] = None,
-    limit: int = 20,
+    limit: int = 100,
     db: Session = Depends(get_db)
 ):
     if db.query(Product).first() is None:
@@ -65,6 +66,9 @@ def search_products(
     if category:
         query = query.filter(Product.category.ilike(f"%{category}%"))
 
+    if target_audience:
+        query = query.filter(or_(Product.target_audience == target_audience, Product.target_audience == 'ALL'))
+
     if min_score is not None:
         query = query.filter(Product.insight_score >= min_score)
 
@@ -81,6 +85,7 @@ def search_products(
             "name": p.name,
             "brand": p.brand,
             "category": p.category,
+            "target_audience": p.target_audience or "ADULT",
             "price": p.price,
             "currency": p.currency,
             "image": p.image,
@@ -91,6 +96,7 @@ def search_products(
         })
 
     return {"count": len(results), "products": results}
+
 
 @router.get("/barcode/{barcode_str}")
 def get_by_barcode(barcode_str: str, db: Session = Depends(get_db)):
