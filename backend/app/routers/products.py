@@ -94,6 +94,13 @@ def search_products(
 
 @router.get("/barcode/{barcode_str}")
 def get_by_barcode(barcode_str: str, db: Session = Depends(get_db)):
+    if db.query(Product).first() is None:
+        try:
+            from app.seed_db import seed_database
+            seed_database()
+        except Exception as e:
+            print(f"Fallback DB Seed Warning: {e}")
+
     product = db.query(Product).filter(Product.barcode == barcode_str).first()
     if not product:
         # Strict rule enforcement: Do not invent fake data if barcode is missing
@@ -109,6 +116,13 @@ def get_by_barcode(barcode_str: str, db: Session = Depends(get_db)):
 
 @router.get("/{product_id}")
 def get_product_detail(product_id: int, db: Session = Depends(get_db)):
+    if db.query(Product).first() is None:
+        try:
+            from app.seed_db import seed_database
+            seed_database()
+        except Exception as e:
+            print(f"Fallback DB Seed Warning: {e}")
+
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
         raise HTTPException(status_code=404, detail="Product not found.")

@@ -110,19 +110,19 @@ export default function Navbar({ user, onOpenAuth, basketCount = 0, onOpenBasket
 
           {/* Right Action Tools */}
           <div className="flex items-center space-x-2 shrink-0">
-            {/* KIDS MODE TOGGLE SWITCH BUTTON */}
-            <button
-              onClick={onToggleKidsMode}
+            {/* KIDS MODE TOGGLE SWITCH LINK */}
+            <Link
+              to={location.pathname === '/kids' ? '/dashboard' : '/kids'}
               className={`px-3 py-1.5 rounded-xl text-xs font-black transition shadow-xs flex items-center space-x-1.5 border ${
-                isKidsMode
+                location.pathname === '/kids'
                   ? 'bg-amber-400 text-stone-900 border-amber-500 shadow-md animate-bounce'
                   : 'bg-gradient-to-r from-sky-50 to-amber-50 text-sky-900 border-sky-200 hover:bg-sky-100'
               }`}
               title="Switch between Adult and Kids Mode"
             >
-              <Smile className={`w-4 h-4 ${isKidsMode ? 'text-stone-900' : 'text-amber-500'}`} />
-              <span>{isKidsMode ? 'Kids Mode 🎈' : 'Kids Zone 🎈'}</span>
-            </button>
+              <Smile className={`w-4 h-4 ${location.pathname === '/kids' ? 'text-stone-900' : 'text-amber-500'}`} />
+              <span>{location.pathname === '/kids' ? 'Adult Mode 👨‍👩‍👧' : 'Kids Zone 🎈'}</span>
+            </Link>
 
             {/* Preferences Link */}
             <Link

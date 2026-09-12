@@ -104,22 +104,18 @@ export default function App() {
         />
 
         <main>
-          {isKidsMode ? (
-            <KidsDashboard onSwitchToAdult={() => setIsKidsMode(false)} />
-          ) : (
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/kids" element={<KidsDashboard onSwitchToAdult={() => setIsKidsMode(false)} />} />
-              <Route path="/scan" element={<ScanPage />} />
-              <Route path="/product/:id" element={<ProductDetailPage onAddToBasket={handleAddToBasket} />} />
-              <Route path="/compare" element={<ComparePage />} />
-              <Route path="/alternatives" element={<AlternativesPage />} />
-              <Route path="/assistant" element={<AssistantPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-            </Routes>
-          )}
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/kids" element={<KidsDashboard />} />
+            <Route path="/scan" element={<ScanPage />} />
+            <Route path="/product/:id" element={<ProductDetailPage onAddToBasket={handleAddToBasket} />} />
+            <Route path="/compare" element={<ComparePage />} />
+            <Route path="/alternatives" element={<AlternativesPage />} />
+            <Route path="/assistant" element={<AssistantPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+          </Routes>
         </main>
 
         {/* Mobile Navigation Bar */}
